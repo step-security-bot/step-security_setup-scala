@@ -1,0 +1,20 @@
+name: "setup-scala"
+description: "GitHub Action to install any version of Java (GraalVM, Java 8, Java 11, Java 14, ...)"
+author: 'step-security'
+inputs:
+  java-version:
+    description: >
+      The Java version to install, a string matching the output format
+      from  `jabba ls-remote`. For example, "adopt@1.8" for the latest
+      AdoptOpenJDK 8 version, "adopt@1.11" for the latest AdoptOpenJDK 11
+      version, or "graalvm@" for the latest GraalVM version.
+    default: "adopt@1.8"
+  jabba-version:
+    description: The Jabba version to install.
+    default: "0.11.2"
+runs:
+  using: "node24"
+  main: "dist/index.js"
+branding:
+  icon: "download"
+  color: "blue"
