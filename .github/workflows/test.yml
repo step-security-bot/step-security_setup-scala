@@ -9,7 +9,12 @@ jobs:
       matrix:
         os: ${{ github.actor == 'dependabot[bot]' && fromJSON('["ubuntu-latest"]') || fromJSON('["ubuntu-latest", "macOS-latest", "windows-latest"]') }}
     steps:
-      - uses: actions/checkout@v7
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@v2
+        with:
+          egress-policy: audit
+
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - run: corepack enable
       - run: corepack prepare yarn@4.18.0 --activate
       - run: corepack yarn install
@@ -20,7 +25,12 @@ jobs:
   custom-url:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@v2
+        with:
+          egress-policy: audit
+
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - run: corepack enable
       - run: corepack prepare yarn@4.18.0 --activate
       - run: corepack yarn install
